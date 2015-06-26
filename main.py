@@ -46,7 +46,8 @@ class Exporter(object):
             self.cloudwatch.put_metric_data(
                 namespace=self.metric_namespace,
                 name=self.queue_to_metric_name[queue_name],
-                unit="Count", value=queue['messages']
+                unit="Count", value=queue['messages'],
+                dimensions={'dimension': 'value'}
             )
 
 if __name__ == '__main__':
