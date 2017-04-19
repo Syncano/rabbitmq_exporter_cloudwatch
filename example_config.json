@@ -1,10 +1,10 @@
 {
   "queue_to_metric_name": {
-    "default": "WorkerDefaultQlen",
+    "default": "WorkerDefaultQlen"
   },
   "region": "eu-west-1",
   "metric_namespace": "Celery/Queues",
-  "url": "http://localhost/api/queues",
+  "url": "http://localhost/api/queues/vhost/{queue}",
   "user": "admin",
   "password": "password"
 }

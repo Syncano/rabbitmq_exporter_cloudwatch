@@ -28,14 +28,14 @@ class Exporter(object):
 
     def run(self):
         while True:
-            queues_info = self.get_metrics()
-            for queue in queues_info:
-                self.put_metric(queue)
+            for queue in self.interesting_queues:
+                queue_info = self.get_metrics(queue)
+                self.put_metric(queue_info)
             time.sleep(TIME_BETWEEN_CHECKS)
 
-    def get_metrics(self):
+    def get_metrics(self, queue):
         response = requests.get(
-            self.url,
+            self.url.format(queue=queue),
             auth=self.auth)
         if response.status_code == 200:
             return response.json()
@@ -49,6 +49,7 @@ class Exporter(object):
                 unit="Count", value=queue['messages'],
                 dimensions={'dimension': 'value'}
             )
+
 
 if __name__ == '__main__':
     Exporter().run()
